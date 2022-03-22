@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sbn
-sbn.set()
+import seaborn as sbs
+sbs.set()
 
 
 from sklearn.datasets import make_blobs
@@ -18,10 +18,13 @@ print(y)
 
 #IRIS dataset. 4 Attributes(features), 150 samples
 
-A = sbn.load_dataset('iris')
+A = sbs.load_dataset('iris')
 print(A)
-
 print(A.head())#shows default of the 1st 5 rows  Note that the first 4 columns are the features and the last is the class category label for the sample
-print(A.tails())#shows default of the last 5 rows
+print(A.tail())#shows default of the last 5 rows
+A.iloc[60:65,:] #displays sample rows 60-64 within the data dataset
 
-A.iloc[60:65,:]
+#
+B = pd.read_csv(r"/home/fletcher/Repos/ML-Study/Features/Bias_correction_ucl.csv")
+print(B.head())
+print(B.shape)
