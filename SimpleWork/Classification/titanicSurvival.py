@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from sklearn.inspection import permutation_importance
+from sklearn.svm import SVC #import Support Vector Classifier module
 
 #import Data
 titanicData = pd.read_csv(
@@ -57,23 +58,33 @@ feature_names = X.keys()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 
 #create Classifier model
-clf = RandomForestClassifier()
+rfc = RandomForestClassifier()
 
 #train the classifier
-clf.fit(X_train, y_train)
+rfc.fit(X_train, y_train)
 
 #test the classifier
-y_pred = clf.predict(X_test)
+y_pred_rfc = rfc.predict(X_test)
 
 # using metrics module for accuracy calculation
-print("ACCURACY OF THE MODEL: ", metrics.accuracy_score(y_test, y_pred))
+print("ACCURACY OF THE MODEL: ", metrics.accuracy_score(y_test, y_pred_rfc))
 
 
 #Display feature importance
-feature_imp = pd.Series(clf.feature_importances_,
-                            index = feature_names).sort_values(ascending = False)
+feature_imp_ = pd.Series(rfc.feature_importances_,
+                        index=feature_names).sort_values(ascending=False)
 
-sort = clf.feature_importances_.argsort()
-plt.barh(feature_names[sort], clf.feature_importances_[sort])
+sort = rfc.feature_importances_.argsort()
+plt.barh(feature_names[sort], rfc.feature_importances_[sort])
 plt.xlabel("Feature Importance")
 plt.show()
+
+from sklearn.svm import SVC #import Support Vector Classifier module
+
+svc = SVC(gamma='auto') # Create a Support Vector Classifier
+svc.fit(X_train, y_train) # Fit the classifier to the input training data
+y_pred_svc = svc.predict(X_test)
+
+
+print("ACCURACY OF THE RANDOM Forest MODEL: ", metrics.accuracy_score(y_test, y_pred_rfc))
+print("ACCURACY OF THE Support Vector MODEL: ", metrics.accuracy_score(y_test, y_pred_svc))
