@@ -20,8 +20,8 @@ X2 = np.hstack((X[:, np.newaxis], on))
 y = y[:, np.newaxis]
 
 
-a = np.linalg.lstsq(X2, y, rcond=None) #least square function
+a = np.linalg.lstsq(X2, y, rcond=None)  # least square function
 
-print(a[0]) # note how the provided values
+print(a[0])  # note how the provided values
 
 y_pred = a[0][0] * X + a[0][1]
