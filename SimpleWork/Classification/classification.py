@@ -7,7 +7,7 @@ sbs.set()
 
 
 X = sbs.load_dataset('iris')
-print(A)
+print(X)
 print(X.head())#shows default of the 1st 5 rows  Note that the first 4 columns are the features and the last is the class category label for the sample
 
 y = X.species # pull labels from dataset
